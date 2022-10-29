@@ -1,4 +1,5 @@
 # Compilation output
+build/
 *.o
 *.d
 *.a
