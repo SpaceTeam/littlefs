@@ -15,14 +15,19 @@ add_library(littlefs::littlefs ALIAS littlefs_littlefs)
 target_sources(littlefs_littlefs PRIVATE lfs.c lfs_util.c)
 set_target_properties(littlefs_littlefs PROPERTIES OUTPUT_NAME littlefs EXPORT_NAME littlefs)
 
+option(LFS_THREADSAFE "Compile with LFS_THREADSAFE defined" ON)
+if(LFS_THREADSAFE)
+    target_compile_definitions(littlefs_littlefs PUBLIC LFS_THREADSAFE)
+endif()
+
 # Install with CMake:
-# cmake [--toolchain <toolchain file> [other options]] -S . -B build
+# cmake [--toolchain <toolchain file>] [-DLFS_THREADSAFE] [other options] -S . -B build
 # cmake --build build
 # sudo cmake --install build [--prefix <prefix of install directory>]
 
 # Use in other project with CMake:
 # find_package(littlefs [<version>] REQUIRED)
-# target_link_libraries(<target> (PUBLIC|PRIVATE) littlefs::littlefs)
+# target_link_libraries(<target> (PUBLIC|INTERFACE|PRIVATE) littlefs::littlefs)
 
 # Install rules
 
