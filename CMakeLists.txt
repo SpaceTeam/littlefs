@@ -20,6 +20,11 @@ if(LFS_THREADSAFE)
     target_compile_definitions(littlefs_littlefs PUBLIC LFS_THREADSAFE)
 endif()
 
+option(LFS_NO_MALLOC "Compile with LFS_NO_MALLOC defined" ON)
+if(LFS_NO_MALLOC)
+    target_compile_definitions(littlefs_littlefs PUBLIC LFS_NO_MALLOC)
+endif()
+
 # Install with CMake:
 # cmake [--toolchain <toolchain file>] [-DLFS_THREADSAFE] [other options] -S . -B build
 # cmake --build build
